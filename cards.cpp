@@ -101,6 +101,32 @@ CardList::CardList() {
     first = nullptr;
 }
 
+CardList &CardList::operator=(const CardList &source) {
+    Node *node = first;
+    while (node != nullptr) {
+        Node *temp = node;
+        node = node->next;
+        delete temp;
+    }
+    first = nullptr;
+    Node *prev = nullptr;
+    for (Node *sourceNode = source.first; sourceNode != nullptr; sourceNode = sourceNode->next) {
+
+        Node *copy = new Node;
+        copy->card = sourceNode->card;
+        copy->next = nullptr;
+
+        if (first == nullptr) {
+            first = copy;
+        }
+        if (prev != nullptr) {
+            prev->next = copy;
+        }
+        prev = copy;
+    }
+    return *this;
+}
+
 player::player(string name, const CardList &cards) : name(name), cards(cards) {
     nextNode = cards.first;
 }

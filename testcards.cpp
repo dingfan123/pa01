@@ -5,61 +5,78 @@
 #include "testcards.h"
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
-int main(){
-  runAll();
-  return 0;
+int main() {
+    runAll();
+    return 0;
 }
 
-void runAll(){
-  test_append();
-  test_equal();
-  test_card();
+void runAll() {
+    test_append();
+    test_list();
+    test_card();
 }
 
-void test_append(){
-  START_TEST("test_append");
-  test_append_empty_list();
-  test_append_single_element_list();
-  END_TEST("test_append");
-
-}
-
-void test_equal(){
-  START_TEST("test_equal");
-  test_equal_empty_list();
-  //test_equal_single_element_list();
-  END_TEST("test_equal");
+void test_append() {
+    START_TEST("test_append");
+    test_append_empty_list();
+    test_append_single_element_list();
+    END_TEST("test_append");
 
 }
 
-void test_card(){
-  START_TEST("test_card");
-  test_card_operator_double_equal();
-  //test_equal_single_element_list();
-  END_TEST("test_card");
+void test_list() {
+    START_TEST("test_list");
+    test_remove();
+    test_contains();
+    END_TEST("test_list");
+}
+
+void test_contains(){
+    CardList l1;
+    l1.append("card1");
+    l1.append("card2");
+    l1.append("card3");
+    assertEquals(l1.contains(Card("card2")), true, "list contains card2");
+    assertEquals(l1.contains(Card("card3")), true, "list contains card3");
+}
+void test_remove(){
+    CardList l1;
+    l1.append("card2");
+    l1.append("card1");
+    l1.remove(Card ("card1"));
+    assertEquals(l1.contains(Card("card1")), false, "list does not contain card1");
+}
+
+void test_card() {
+    START_TEST("test_card");
+    test_card_operator_double_equal();
+    END_TEST("test_card");
 }
 
 
-void test_append_empty_list(){ 
-// A test case for append single card node to LinkedList
+void test_append_empty_list() {
+    CardList l1;
+    l1.append("card1");
+    assertEquals(l1.first->card, Card("card1"), "card1");
 }
 
-void test_append_single_element_list(){ 
-  // Tests cases should be independent,
-    // small, fast, orthogonal (test for different cases)
-
-}
-void test_equal_empty_list(){ 
-  string testname = "case 0: [], []";
-  CardList l1, l2;
-  assertEquals(l1.first,l2.first, testname);
-  assertEquals(l1.first, nullptr, "empty list has null first");
+void test_append_single_element_list() {
+    // Tests cases should be independent,
+    CardList l1;
+    l1.append("card1");
+    l1.append("card2");
+    assertEquals(l1.first->card, Card("card1"), "first card");
+    assertEquals(l1.first->next->card, Card("card2"), "second card");
 }
 
-void test_card_operator_double_equal(){
-  // Test to check if == is overloaded for card
+
+void test_card_operator_double_equal() {
+    Card card1("somecard");
+    Card card2("somecard");
+    assertEquals(card1 == card2, true, "cards are equal");
 }
 
 

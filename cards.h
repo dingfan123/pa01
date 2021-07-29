@@ -35,6 +35,7 @@ public:
     CardList(); //constructor
     ~CardList();  //destructor
     CardList(const CardList& source); //copy constructor
+    CardList& operator=(const CardList& source);
     void append(string value); //append
 
     void remove(Card card);//remove
