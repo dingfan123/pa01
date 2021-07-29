@@ -53,15 +53,15 @@ void assertEquals(int expected, int actual, string testDescription){
 }
 
 // You should add more assertEquals function for your classes. For example, Node/Card class
-/*
-void assertEquals(Node *expected, Node *actual, string testDescription){
-  if (expected == actual) {
+
+void assertEquals(CardList::Node *expected, CardList::Node *actual, string testDescription){
+  if (expected->card == actual->card) {
     cout<<"PASSED " << endl;
   } else {
     cout<< "  FAILED: "<< testDescription << endl <<"   Expected: "<< expected << " Actual: " << actual << endl;
   }
 }
-*/
+
 
 
 #endif

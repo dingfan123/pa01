@@ -1,13 +1,12 @@
 CXX_FLAG = --std=c++11 -g
 
-all: testcards
+all: testcards game
 
-common = cards.o
+testcards: testcards.o cards.o
+		g++ $(CXX_FLAG) -o testcards testcards.o cards.o
 
-testcards: testcards.o $(common)
-	g++ $(CXX_FLAG) -o testcards
-
-
+game: main.o cards.o
+		g++ $(CXX_FLAG) -o game main.o cards.o
 
 clean:
-	rm -f testcards *.o
+	rm -f testcards game *.o

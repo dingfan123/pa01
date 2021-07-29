@@ -53,8 +53,9 @@ void test_append_single_element_list(){
 }
 void test_equal_empty_list(){ 
   string testname = "case 0: [], []";
-  LinkedList l1, l2;
-  assertEquals(l1.head,l2.head);
+  CardList l1, l2;
+  assertEquals(l1.first,l2.first, testname);
+  assertEquals(l1.first, nullptr, "empty list has null first");
 }
 
 void test_card_operator_double_equal(){

@@ -1,11 +1,14 @@
 //cards.h
-//Authors: Your Partner's Name and Your Name
+//Authors: Dingfan Zheng
 //All class declarations go here
 
 #ifndef CARDS_H
 #define CARDS_H
 
-#endif
+#include <string>
+#include <ostream>
+
+using namespace std;
 
 // Use this file to define all your classes and public functions
 // You should design your program with OOP prinicples using classes
@@ -18,26 +21,49 @@
 // Make sure you overload the desired operators
 // This is not the fixed design. We are not expecting exactly 3 classes. You can do with less or more.
 // Important thing to consider is abstraction.
+class Card{
+public:
+    string cardname;
+    bool operator==(const Card &rhs) const;
+    Card();
+    Card(const string &cardname);
+
+    friend ostream &operator<<(ostream &os, const Card &card);
+};
 class CardList{
 public:
-    void AddCard(string x);
+    CardList(); //constructor
+    ~CardList();  //destructor
+    CardList(const CardList& source); //copy constructor
+    void append(string value); //append
 
-    CardList();
+    void remove(Card card);//remove
+    bool contains(Card card); //contains
+
+    friend ostream& operator<<(ostream& out, CardList list);
 
 
     struct Node {
-        int number;
+        Card card;
         Node *next;
     };
-
     Node *first;
-
-
-
 };
-class hand{
 
-};
+
 class player{
+public:
+    player(string name, const CardList &cards);
+    Card nextCard();
+    bool isDone();
+    void remove(Card card);
+    bool contains(Card card);
 
+    friend ostream& operator<<(ostream& out, player p);
+private:
+    string name;
+    CardList cards;
+    CardList::Node* nextNode;
 };
+
+#endif
