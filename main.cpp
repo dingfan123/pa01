@@ -68,9 +68,8 @@ int main(int argv, char **argc) {
         }
     }
 
-    cout<<alice;
-    cout<<endl;
-    cout<<bob;
+    cout << endl << alice << endl;
+    cout << endl << bob;
 
 
     return 0;
